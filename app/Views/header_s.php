@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>PPDB SMKN 2 Pandeglang</title>
 	<!-- CSS only -->
-	<link href="<?php echo base_url('assets/bootstrap-5.1.3/css/bootstrap.min.css'); ?>" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
 
@@ -193,7 +193,17 @@
 			}
 		}
 	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="<?php echo base_url("assets/jquery-steps/jquery.steps.js");?>"></script>
 
+	<script>
+	$("#example-basic").steps({
+	    headerTag: "h3",
+	    bodyTag: "section",
+	    transitionEffect: "slideLeft",
+	    autoFocus: true
+	});
+	</script>
 
 </head>
 <body>
@@ -213,8 +223,8 @@
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 			<li class="menu-item hidden"><a href="<?php echo site_url('info') ?>">Info</a></li>
-			<li class="menu-item hidden"><a href="<?php echo site_url('users/profil') ?>">Pendaftaran</a>
-				<li class="menu-item hidden"><a href="<?php echo site_url('users/profile') ?>">Ubah Akun</a>
+			<!-- <li class="menu-item hidden"><a href="<?php echo site_url('users') ?>">Login/Daftar</a> -->
+				<li class="menu-item hidden"><a href="<?php echo site_url('users/profile') ?>">Akun</a>
 			<li class="menu-item hidden"><a href="<?php echo site_url('users/logout') ?>">Keluar</a>
 
 

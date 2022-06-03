@@ -2,40 +2,24 @@
 
 <!-- CONTENT -->
 
-<!-- <section>
-	<h1>Tentang Kami</h1>
-	<p><?= SEKILAS ?></p>
-
-	<p>
-		<ul>
-			<?= PK1 ?>
-			<?= PK2 ?>
-			<?= PK3 ?>
-			<?= PK4 ?>
-			<?= PK5 ?>
-			<?= PK6 ?>
-		</ul>
-	</p>
-	</section> -->
-
 <div class="heroe">
 	<section>
-		<h1>Jadwal PPDB</h1>
+		<h1>Jadwal Pelaksanaan</h1>
 		<p>
 			<ul>
-				<li>Sosialisasi : 20 mei s.d 06 Juni 2022</li>
-				<li>Pendaftaran : 13 s.d 18 Juni 2022</li>
-				<li>Uji Kompetensi/test Khusus : 20 s.d 25 Juni 2022</li>
-				<li>Verifikasi dan Rekonsiliasi data : 21 s.d 29 Juni 2022</li>
-				<li>Pengumuman Hasil : 30 Juni 2022</li>
-				<li>Daftar Ulang : 04 s.d 07 Juli 2022</li>
+				<li>Sosialisasi : 20 mei s.d 14 Juni 2022</li>
+				<li>Pendaftaran : 15 s.d 20 Juni 2022</li>
+				<li>Uji Kompetensi/test Khusus : 21 s.d 29 Juni 2022</li>
+				<li>Verifikasi dan Rekonsiliasi data : 21 Juni s.d 1 Juli 2022</li>
+				<li>Pengumuman Hasil : 4 Juli 2022</li>
+				<li>Daftar Ulang : 05 s.d 07 Juli 2022</li>
 				<li>Awal Tahun Pelajaran 2022/2023 : 11 Juli 2022</li>
 			</ul>
 		</p>
 	</section>
 </div>
 
-<!-- <div class="further">
+<div class="further">
 	<section>
 		<h1>Program Keahlian Dan Kuota</h1>
 		<p>
@@ -47,12 +31,10 @@
 				<li><?= PK5 ?></li>
 				<li><?= PK6 ?></li>
 				<li><?= PK7 ?></li>
-				<li><?= PK8 ?></li>
-
 			</ul>
 		</p>
 	</section>
-</div> -->
+</div>
 
 <!-- <div class="further">
 	<section>

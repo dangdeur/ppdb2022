@@ -1,7 +1,6 @@
 <?php namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\PendaftarModel;
 
 
 class Users extends BaseController
@@ -22,7 +21,7 @@ class Users extends BaseController
 
 			$errors = [
 				'password' => [
-					'validateUser' => 'Email atau Password salah'
+					'validateUser' => 'Email atau Password tidak sama'
 				]
 			];
 
@@ -162,36 +161,11 @@ class Users extends BaseController
 	public function profil()
 	{
 		$data=$this->session->get();
-
-		if ($this->cekPendaftaran($data['id_users']))
-		{
-			$data['status']=1;
-		}
-		else {
-				$data['status']=0;
-		}
+		if ($this->session->has('firstname')) {
 		echo view('header_l', $data);
-
+		}
 		echo view('profil',$data);
-	}
-
-	public function cekPendaftaran($id)
-	{
-		$model = new PendaftarModel();
-		$builder = $model->table('pendaftar');
-
-		$query = $builder->where('id_users',$id);
-
-		if ($query->countAllResults() > 0)
-		{
-			return TRUE;
-		}
-		else {
-			return FALSE;
-		}
-
-
-
+		
 	}
 
 	//--------------------------------------------------------------------

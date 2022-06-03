@@ -78,14 +78,33 @@ defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+
+//Identitas sekolah
 defined('SEKOLAH') || define('SEKOLAH','SMKN 2 Pandeglang');
 defined('JARGON') || define('JARGON','SMK Pusat Keunggulan');
-defined('SEKILAS') || define('SEKILAS','Berdiri di area seluas 8 hektar dan memiliki 8 Program Keahlian, memiliki 150 orang Pendidik dan Tenaga Kependidikan yang profesional dalam bidangnya');
-defined('PK1') || define('PK1','Agribisnis Tanaman Pangan &#124; 122 Peserta Didik');
-defined('PK2') || define('PK2','Agribisnis Pengolahan Hasil Pertanian &#124; 122 Peserta Didik');
-defined('PK3') || define('PK3','Teknik Kendaraan Ringan Otomotif &#124; 122 Peserta Didik');
-defined('PK4') || define('PK4','Teknik Installasi Tenaga Listrik &#124; 122 Peserta Didik');
-defined('PK5') || define('PK5','Desain Komunikasi Visual');
-defined('PK6') || define('PK6','Teknik Komputer');
-defined('PK7') || define('PK7','Kimia Analis');
-defined('PK8') || define('PK8','Teknik Dan Bisnis Sepeda Motor');
+defined('WEB') || define('WEB','www.smkn2pandeglang.sch.id');
+defined('SITUS') || define('SITUS','PPDB SMKN 2 Pandeglang');
+
+//Program keahlian dan kuota
+defined('PK1') || define('PK1','Agribisnis Tanaman &#124; 108 Peserta Didik');
+defined('PK2') || define('PK2','Agribisnis Pengolahan Hasil Pertanian &#124; 72 Peserta Didik');
+defined('PK3') || define('PK3','Teknik Otomotif &#124; 144 Peserta Didik');
+defined('PK4') || define('PK4','Teknik Ketenagalistrikan &#124; 72 Peserta Didik');
+defined('PK5') || define('PK5','Desain Komunikasi Visual &#124; 108 Peserta Didik');
+defined('PK6') || define('PK6','Teknik Jaringan Komputer Dan Telekomunikasi &#124; 108 Peserta Didik');
+defined('PK7') || define('PK7','Kimia Analis &#124; 72 Peserta Didik');
+
+//pengguna
+defined('ADMIN') || define('ADMIN','1');
+defined('VERIFIKATOR') || define('VERIFIKATOR','2');
+defined('PESERTA') || define('PESERTA','3');
+
+//pekerjaan
+defined('PEKERJAAN') || define('PEKERJAAN',['Tidak Bekerja','PNS/ASN/PPPK','TNI/Polri','Honorer Pemerintah','Karyawan Swasta','Buruh Lepas','Wiraswasta','Petani']);
+
+//jalur Pendaftaran
+defined('JALUR') || define('JALUR',['---','Reguler','Afirmasi','Prestasi','Perpindahan Orangtua']);
+
+//jalur Pendaftaran
+defined('PROGRAM_KEAHLIAN') || define('PROGRAM_KEAHLIAN',['---','Agribisnis Tanaman (AT)','Agribisnis Pengolahan Hasil Pertanian (APHP)','Teknik Otomotif (TO)','Teknik Ketenagalistrikan (TKL)',
+        'Desain Komunikasi Visual (DKV)','Teknik Jaringan Komputer Dan Telekomunikasi (TJKT)','Kimia Analis (KA)']);

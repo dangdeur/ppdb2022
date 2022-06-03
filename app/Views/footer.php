@@ -25,7 +25,10 @@
 	}
 </script>
 
+
+
 <!-- -->
 
+<script src="<?php echo base_url('assets/bootstrap-5.1.3/js/bootstrap.min.js');?>"></script>
 </body>
 </html>

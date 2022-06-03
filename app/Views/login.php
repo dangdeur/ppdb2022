@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-5 pt-3 pb-3 bg-white from-wrapper">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 mt-3 pt-3 pb-3 bg-white from-wrapper">
       <div class="container">
         <h3>Login</h3>
         <hr>
@@ -9,7 +9,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="" action="<?php echo site_url('users') ?>" method="post">
+        <form class="d-grid gap-3" action="<?php echo site_url('users') ?>" method="post">
           <div class="form-group">
            <label for="email">Email</label>
            <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email') ?>">
@@ -29,7 +29,7 @@
             <div class="col-12 col-sm-4">
               <button type="submit" class="btn btn-primary">Login</button>
             </div>
-            <div class="col-12 col-sm-8 text-right">
+            <div class="col-12 col-sm-8 text-end">
               <a href="<?php echo site_url('users/register') ?>">Belum punya akun ?</a>
             </div>
           </div>
