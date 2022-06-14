@@ -10,7 +10,7 @@ Login https://github.com/alexlancer/codeigniter4login
 git clone https://github.com/dangdeur/ppdb2022
 
 ## Pengaturan
-# cp env .env
+cp env .env
 
 Sesuaikan .env
 => database.default.hostname = localhost
@@ -19,7 +19,8 @@ Sesuaikan .env
 => database.default.password =
 => database.default.DBDriver = MySQLi
 
-CI_ENVIRONMENT = development  ===> CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
+=> CI_ENVIRONMENT = production
 
 \app\Config\App.php
 => public $baseURL = 'http://localhost/ppdb2022/public/';
