@@ -6,7 +6,7 @@
 	<!-- CSS only -->
 	<link href="<?php echo base_url('assets/bootstrap-5.1.3/css/bootstrap.min.css'); ?>" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+	<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
 
 	<!-- STYLES -->
 
@@ -203,10 +203,10 @@
 
 	<div class="menu">
 		<ul>
-			<li class="logo"><a href="http://www.smkn2pandeglang.sch.id" target="_blank">
-													<img height="44" title="SMKN 2 Pandeglang"
-															alt="SMKN 2 Pandeglang"
-															src="">
+			<li class="logo"><a href="<?= WEB ?>" target="_blank">
+													<img height="35" title="<?= SEKOLAH ?>"
+															alt="<?= SEKOLAH ?>"
+															src="<?php echo base_url('assets/gambar/logo.jpg'); ?>">  <?= SITUS ?>
 												</a>
 			</li>
 			<li class="menu-toggle">

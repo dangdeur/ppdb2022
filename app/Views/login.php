@@ -9,7 +9,7 @@
             <?= session()->get('success') ?>
           </div>
         <?php endif; ?>
-        <form class="d-grid gap-3" action="<?php echo site_url('users') ?>" method="post">
+        <form class="d-grid gap-3" action="<?php echo base_url('users') ?>" method="post">
           <div class="form-group">
            <label for="email">Email</label>
            <input type="text" class="form-control" name="email" id="email" value="<?= set_value('email') ?>">

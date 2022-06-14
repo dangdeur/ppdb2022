@@ -81,6 +81,8 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 
 //Identitas sekolah
 defined('SEKOLAH') || define('SEKOLAH','SMKN 2 Pandeglang');
+//Kode sekolah sesuai dg nomor sekolah, 2 digit
+defined('KODESEKOLAH') || define('KODESEKOLAH','02');
 defined('JARGON') || define('JARGON','SMK Pusat Keunggulan');
 defined('WEB') || define('WEB','www.smkn2pandeglang.sch.id');
 defined('SITUS') || define('SITUS','PPDB SMKN 2 Pandeglang');
@@ -97,7 +99,7 @@ defined('PK7') || define('PK7','Kimia Analis &#124; 72 Peserta Didik');
 //pengguna
 defined('ADMIN') || define('ADMIN','1');
 defined('VERIFIKATOR') || define('VERIFIKATOR','2');
-defined('PESERTA') || define('PESERTA','3');
+// defined('PESERTA') || define('PESERTA','3');
 
 //pekerjaan
 defined('PEKERJAAN') || define('PEKERJAAN',['Tidak Bekerja','PNS/ASN/PPPK','TNI/Polri','Honorer Pemerintah','Karyawan Swasta','Buruh Lepas','Wiraswasta','Petani']);
@@ -108,3 +110,5 @@ defined('JALUR') || define('JALUR',['---','Reguler','Afirmasi','Prestasi','Perpi
 //jalur Pendaftaran
 defined('PROGRAM_KEAHLIAN') || define('PROGRAM_KEAHLIAN',['---','Agribisnis Tanaman (AT)','Agribisnis Pengolahan Hasil Pertanian (APHP)','Teknik Otomotif (TO)','Teknik Ketenagalistrikan (TKL)',
         'Desain Komunikasi Visual (DKV)','Teknik Jaringan Komputer Dan Telekomunikasi (TJKT)','Kimia Analis (KA)']);
+
+//
