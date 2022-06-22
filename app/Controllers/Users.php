@@ -75,6 +75,10 @@ class Users extends BaseController
 	}
 
 	public function register(){
+		if (PENDAFTARAN == 'TUTUP')
+		{
+			return redirect()->to(site_url());
+		}
 		$data = [];
 		helper(['form']);
 
@@ -194,17 +198,19 @@ class Users extends BaseController
 		{
 			$data['personal']=TRUE;
 			//$data['status_pendaftaran']=1;
-			$query_personal = $db->query('SELECT * FROM pendaftar WHERE pendaftar.id_users='.$id);
+			$query_personal = $db->query('SELECT * FROM pendaftar WHERE id_users='.$id);
 			foreach ($query_personal->getRow() as $keyp => $valuep) {
 			 		$data[$keyp]=$valuep;
 		}
-
+	//$no_pendaftaran=$data['no_pendaftaran'];
 		if ($this->cekNilai($data['id_users']))
 			{
-				//$db=new PersonalModel;
-				//$data['status_pendaftaran']=2;
-				$query_nilai = $db->query('SELECT * FROM pendaftar JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
-		 											WHERE pendaftar.id_users='.$id);
+
+				// $query_nilai = $db->query('SELECT * FROM pendaftar JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+		 		// 									WHERE pendaftar.no_pendaftaran='.$no_pendaftaran);
+
+			$query_nilai = $db->query('SELECT * FROM nilai WHERE id_users='.$id);
+			//$db->getLastQuery();
 				foreach ($query_nilai->getRow() as $keyn => $valuen) {
 				 		$data[$keyn]=$valuen;
 					}
@@ -217,12 +223,14 @@ class Users extends BaseController
 
 			if ($this->cekPendaftaran($data['id_users']))
 				{
-					//$db=new PersonalModel;
-					//$data['status_pendaftaran']=3;
-					$query_pendaftaran = $db->query('SELECT * FROM pendaftar
-														JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
-														JOIN pendaftaran ON nilai.no_pendaftaran = pendaftaran.no_pendaftaran
-														WHERE pendaftar.id_users='.$id);
+										// $query_pendaftaran = $db->query('SELECT * FROM pendaftar
+										// 				JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+										// 				JOIN pendaftaran ON nilai.no_pendaftaran = pendaftaran.no_pendaftaran
+										// 				WHERE pendaftar.no_pendaftaran='.$no_pendaftaran);
+
+										$query_pendaftaran = $db->query('SELECT * FROM pendaftaran WHERE id_users='.$id);
+													//	echo $db->getLastQuery();
+
 					foreach ($query_pendaftaran->getRow() as $keypn => $valuepn) {
 					 		$data[$keypn]=$valuepn;
 						}
@@ -232,7 +240,8 @@ class Users extends BaseController
 				{
 					$data['pendaftaran']=FALSE;
 				}
-
+// echo "<pre>";
+// print_r($data);
 				$x=$data['status_pendaftaran'];
 				switch ($x) {
 					case $x <3:
@@ -282,7 +291,7 @@ class Users extends BaseController
 		// 	 $data['status_pendaftaran']=3;
 		//  	 }
 		//  }
-
+		$data['attr']=$this->tutup();
 
 		echo view('header_l', $data);
 		echo view('profil',$data);
@@ -307,9 +316,26 @@ class Users extends BaseController
 		{
 			return TRUE;
 		}
+		else {
+			return FALSE;
+		}
 	}
 
 	public function cekPendaftaran($id)
+	{
+		$model = new PendaftaranModel();
+		//$model->table('pendaftaran');
+		$query = $model->where('id_users',$id);
+		if ($query->countAllResults() > 0)
+		{
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
+	public function cekDobel($no_pendaftaran)
 	{
 		$model = new PendaftaranModel();
 		$query = $model->where('id_users',$id);
@@ -319,6 +345,66 @@ class Users extends BaseController
 		}
 	}
 
+	public function lupa()
+	{
+
+		$data = [];
+		helper(['form']);
+		$model = new UserModel();
+
+		if ($this->request->getMethod() == 'post') {
+			//let's do the validation here
+			$rules = [
+				'firstname' => 'required|min_length[3]|max_length[30]',
+				'lastname' => 'required|min_length[3]|max_length[50]',
+				];
+
+			if($this->request->getPost('password') != ''){
+				$rules['password'] = 'required|min_length[4]|max_length[255]';
+				$rules['password_confirm'] = 'matches[password]';
+			}
+
+
+			if (! $this->validate($rules)) {
+				$data['validation'] = $this->validator;
+			}else{
+
+				$newData = [
+					'id_users' => session()->get('id_users'),
+					'firstname' => $this->request->getPost('firstname'),
+					'lastname' => $this->request->getPost('lastname'),
+					];
+					if($this->request->getPost('password') != ''){
+						$newData['password'] = $this->request->getPost('password');
+					}
+				$model->save($newData);
+
+				session()->setFlashdata('success', 'Berhasil diperbaharui');
+				return redirect()->to('users/profile');
+
+			}
+		}
+
+		$data['user'] = $model->where('id_users', session()->get('id_users'))->first();
+
+		if ($this->session->has('firstname')) {
+		echo view('header_l', $data);
+		}else {
+			echo view('header', $data);
+		}
+
+		echo view('profile');
+		//echo view('templates/footer');
+		} //end lupa
+
+		public function tutup()
+		{
+			if (PENDAFTARAN == 'TUTUP')
+			{
+				$attr='disabled';
+				return $attr;
+			}
+		}
 	//--------------------------------------------------------------------
 
 }

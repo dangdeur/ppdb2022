@@ -25,6 +25,7 @@ class App extends BaseConfig
      */
     //public $baseURL = 'http://localhost:8080/';
     public $baseURL = 'http://localhost/ppdb2022/public/';
+  //  public $baseURL = 'http://192.168.135.24/ppdb2022/public/';
 
     /**
      * --------------------------------------------------------------------------

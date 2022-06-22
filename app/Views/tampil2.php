@@ -48,18 +48,14 @@
 
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?= SEKOLAH ?></a>
-
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control form-control-dark w-200 form-control-plaintext btn-dark" type="text" value="<?= $firstname." ".$lastname ?>" aria-label="Search">
-
+  <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-
       <a class="nav-link px-3" href="<?php echo site_url('verifikasi/logout') ?>">Keluar</a>
     </div>
-
   </div>
 </header>
 
@@ -88,27 +84,13 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/cekPendaftaran') ?>">
-              <span data-feather="file"></span>
-              Cek Pendaftaran
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo site_url('admin/reset') ?>">
-              <span data-feather="file"></span>
-              Reset Akun
-            </a>
-          </li>
-
 
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <!-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> -->
-        <!-- <h1 class="h2"><?= $firstname." ".$lastname ?></h1> -->
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><?= $firstname." ".$lastname ?></h1>
         <!-- <div class="btn-toolbar mb-2 mb-md-0"> -->
           <!-- <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -119,4 +101,38 @@
             This week
           </button> -->
         <!-- </div> -->
-      <!-- </div> -->
+      </div>
+
+      <form method='get' action="<?php echo site_url('paginasi/tampilSemua') ?>" id="searchForm">
+        <input type='text' name='search' value='<?= $search ?>'><input type='button' id='btnsearch' value='Submit' onclick='document.getElementById("searchForm").submit();'>
+      </form>
+      <br/>
+
+      <table class="table table-hover" border='1'>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>NISN</th>
+            <th>Nama Pendaftar</th>
+            <th>Alamat</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach($pendaftar as $user){
+            echo "<tr>";
+            echo "<td>".$user['no_pendaftaran']."</td>";
+            echo "<td>".$user['nisn']."</td>";
+            echo "<td>".$user['nama_pendaftar']."</td>";
+            echo "<td>".$user['sekolah_asal']."</td>";
+            echo "</tr>";
+          }
+          ?>
+        </tbody>
+      </table>
+
+      <!-- Paginate -->
+      <div style='margin-top: 10px;'>
+        <?= $pager->links() ?>
+      </div>

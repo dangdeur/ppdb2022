@@ -13,7 +13,7 @@ echo '<br /><h3>Form Isian Data Personal</h3>';
 echo '<div class="mb-3 row">';
 echo form_label('Nama Pendaftar', 'nama_pendaftar',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
-echo form_input(['name'=>'nama_pendaftar','id'=>'nama_pendaftar','class'=>'form-control-plaintext','maxlength' => '10','size'=>'10','value'=>$firstname." ".$lastname,]);
+echo form_input(['name'=>'nama_pendaftar','id'=>'nama_pendaftar','class'=>'form-control-plaintext','value'=>$firstname." ".$lastname,]);
 echo '</div>';
 echo '</div>';
 
@@ -24,11 +24,11 @@ echo '<div class="row mb-3">';
 echo form_label('Jenis Kelamin', 'jk',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
 echo '<div class="row">';
-echo '<div class="col-2">';
+echo '<div class="col">';
 echo form_radio(['name'=>'jk','id'=>'jk','class'=>'form-check-input'],'L',set_value('jk') == 'L' ? TRUE : FALSE);
 echo form_label('Laki-laki', 'jk',['class'=>'form-check-label']);
 echo '</div>';
-echo '<div class="col-2">';
+echo '<div class="col">';
 echo form_radio(['name'=>'jk','id'=>'jk','class'=>'form-check-input'],'P',set_value('jk') == 'P' ? TRUE : FALSE);
 echo form_label('Perempuan', 'jk',['class'=>'form-check-label']);
 echo '</div>';
@@ -41,35 +41,36 @@ echo '<div class="row mb-3">';
 echo form_label('NISN', 'nisn',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
 echo form_input(['name'=>'nisn','value'=>set_value('nisn'),'id'=>'nisn','class'=>'form-control col-sm-10','maxlength' => '10','size'=>'10','placeholder'=>'format 10 digit']);
+echo '<div id="passwordHelpBlock" class="form-text">NISN harus sesuai dengan yang terdaftar di DAPODIK. NISN <strong>BUKAN</strong> Nomor Induk Sekolah</div>';
 echo '</div>';
 echo '</div>';
 
 echo '<div class="row mb-3">';
 echo form_label('Tempat Tanggal Lahir', 'tgl_lahir',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
-$tgl['']="---";
+$tgl['']="Tanggal";
 for ($a=1;$a<=31;$a++) {
   $tgl[$a]=$a;
 }
-$bln=['0'=>'---','01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei','06'=>'Juni',
+$bln=['0'=>'Bulan','01'=>'Januari','02'=>'Februari','03'=>'Maret','04'=>'April','05'=>'Mei','06'=>'Juni',
       '07'=>'Juli','08'=>'Agustus','09'=>'September','10'=>'Oktober','11'=>'November','12'=>'Desember'];
-$thn['']="---";
-for ($b=2005;$b<=2010;$b++) {
+$thn['']="Tahun";
+for ($b=2004;$b<=2009;$b++) {
 $thn[$b]=$b;
 }
 $attr=['class'=>'form-select'];
 
 echo '<div class="row">';
-echo '<div class="col-3">';
+echo '<div class="col">';
 echo form_input(['name'=>'tempat_lahir','value'=>set_value('tempat_lahir'),'id'=>'tempat_lahir','class'=>'form-control','placeholder'=>'Kabupaten/Kota']);
 echo '</div>';
-echo '<div class="col-1">';
+echo '<div class="col">';
 echo form_dropdown('tgl', $tgl,set_value('tgl'),$attr);
 echo '</div>';
-echo '<div class="col-3">';
+echo '<div class="col">';
 echo form_dropdown('bln', $bln,set_value('bln'),$attr);
 echo '</div>';
-echo '<div class="col-2">';
+echo '<div class="col">';
 echo form_dropdown('thn', $thn,set_value('thn'),$attr);
 echo '</div>';
 echo '</div>';
@@ -184,7 +185,7 @@ echo '</div>';//row
 
 //KKS
 echo '<div class="mb-3 row">';
-echo form_label('No Kartu Keluarga Sejahtera', 'kks',['class'=>'col-sm-2 col-form-label']);
+echo form_label('No Kartu Keluarga Sejahtera (KKS/PKH)', 'kks',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
 echo form_input(['name'=>'no_kks','value'=>set_value('no_kks'),'id'=>'kks','class'=>'form-control','placeholder'=>'Nomor KKS apabila ada']);
 echo '</div>';

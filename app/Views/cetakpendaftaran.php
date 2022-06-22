@@ -200,5 +200,5 @@ Keterangan :
   </ol>
 <li>Peserta PPDB mencetak Kartu Tes PPDB 1 lembar dan ditempeli pas foto yang jelas. Digunakan untuk syarat mengikuti Seleksi PPDB. Kartu Tes hanya ditunjukan ke pengawas ruang ujian</li>
 <li>Data pendaftaran, pilihan Program Keahlian dapat diubah apabila belum diverifikasi oleh Panitia PPDB SMKN 2 Pandeglang</li>
-<li>Pada waktu verifikasi yang telah ditetapkan di atas, Calon Peserta Didik datang ke Kampus SMKN 2 Pandeglang, untuk melaksanakan Ujian Seleksi PPDB dengan verifikasi kesesuaian berkas dan isian form pendaftaran.</li>
+<li>Pada waktu verifikasi yang telah ditetapkan di atas, Calon Peserta Didik datang ke Kampus SMKN 2 Pandeglang, untuk melaksanakan Ujian Seleksi PPDB dan verifikasi kesesuaian berkas dengan isian form pendaftaran.</li>
 </ul>

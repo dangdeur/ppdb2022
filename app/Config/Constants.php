@@ -78,6 +78,10 @@ defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+//buka / tutup Pendaftaran
+//
+//defined('PENDAFTARAN') || define('PENDAFTARAN','BUKA');
+defined('PENDAFTARAN') || define('PENDAFTARAN','TUTUP');
 
 //Identitas sekolah
 defined('SEKOLAH') || define('SEKOLAH','SMKN 2 Pandeglang');
@@ -90,11 +94,12 @@ defined('SITUS') || define('SITUS','PPDB SMKN 2 Pandeglang');
 //Program keahlian dan kuota
 defined('PK1') || define('PK1','Agribisnis Tanaman &#124; 108 Peserta Didik');
 defined('PK2') || define('PK2','Agribisnis Pengolahan Hasil Pertanian &#124; 72 Peserta Didik');
-defined('PK3') || define('PK3','Teknik Otomotif &#124; 144 Peserta Didik');
-defined('PK4') || define('PK4','Teknik Ketenagalistrikan &#124; 72 Peserta Didik');
-defined('PK5') || define('PK5','Desain Komunikasi Visual &#124; 108 Peserta Didik');
-defined('PK6') || define('PK6','Teknik Jaringan Komputer Dan Telekomunikasi &#124; 108 Peserta Didik');
-defined('PK7') || define('PK7','Kimia Analis &#124; 72 Peserta Didik');
+defined('PK3') || define('PK3','Teknik Kendaraan Ringan &#124; 72 Peserta Didik');
+defined('PK4') || define('PK4','Teknik Bisnis Sepeda Motor &#124; 72 Peserta Didik');
+defined('PK5') || define('PK5','Teknik Ketenagalistrikan &#124; 72 Peserta Didik');
+defined('PK6') || define('PK6','Desain Komunikasi Visual &#124; 108 Peserta Didik');
+defined('PK7') || define('PK7','Teknik Jaringan Komputer Dan Telekomunikasi &#124; 108 Peserta Didik');
+defined('PK8') || define('PK8','Analisis Pengujian Laboratorium &#124; 72 Peserta Didik');
 
 //pengguna
 defined('ADMIN') || define('ADMIN','1');
@@ -107,8 +112,11 @@ defined('PEKERJAAN') || define('PEKERJAAN',['Tidak Bekerja','PNS/ASN/PPPK','TNI/
 //jalur Pendaftaran
 defined('JALUR') || define('JALUR',['---','Reguler','Afirmasi','Prestasi','Perpindahan Orangtua']);
 
+//layanan bantuan
+defined('BANTUAN') || define('BANTUAN',['Reset Password']);
+
 //jalur Pendaftaran
-defined('PROGRAM_KEAHLIAN') || define('PROGRAM_KEAHLIAN',['---','Agribisnis Tanaman (AT)','Agribisnis Pengolahan Hasil Pertanian (APHP)','Teknik Otomotif (TO)','Teknik Ketenagalistrikan (TKL)',
-        'Desain Komunikasi Visual (DKV)','Teknik Jaringan Komputer Dan Telekomunikasi (TJKT)','Kimia Analis (KA)']);
+defined('PROGRAM_KEAHLIAN') || define('PROGRAM_KEAHLIAN',['---','Agribisnis Tanaman (AT)','Agribisnis Pengolahan Hasil Pertanian (APHP)','Teknik Otomotif-Kendaraan Ringan (TKRO)','Teknik Otomotif-Bisnis Sepeda Motor (TBSM)','Teknik Ketenagalistrikan (TKL)',
+        'Desain Komunikasi Visual (DKV)','Teknik Jaringan Komputer Dan Telekomunikasi (TJKT)','Analisis Pengujian Laboratorium (APL)']);
 
 //

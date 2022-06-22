@@ -30,9 +30,10 @@ echo '</div>';
 
 //tahun lulus
 echo '<div class="row mb-3">';
-echo form_label('Tahun Lulus SMT/MTs', 'tahun_lulus',['class'=>'col-sm-2 col-form-label']);
+echo form_label('Tahun Lulus SMP/MTs', 'tahun_lulus',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
-echo form_input(['name'=>'tahun_lulus','value'=>set_value('tahun_lulus'),'id'=>'tahun_lulus','class'=>'form-control col-sm-10','placeholder'=>'Tahun lulus SMP/MTs','size'=>'4','maxlength'=>'4']);
+//echo form_input(['name'=>'tahun_lulus','value'=>set_value('tahun_lulus'),'id'=>'tahun_lulus','class'=>'form-control col-sm-10','placeholder'=>'Tahun lulus SMP/MTs','size'=>'4','maxlength'=>'4']);
+echo form_dropdown('tahun_lulus',['2022'=>'2022','2021'=>'2021','2020'=>'2020'],set_value('tahun_lulus'),['class'=>'form-select']);
 echo '</div>';
 echo '</div>';
 
@@ -107,7 +108,12 @@ echo '</div>';
 echo '</div>';
 echo '</div>';
 
+echo '<div class="row mb-3">';
+echo form_label('<strong>Nilai dalam satuan 0-100 tanpa desimal, hanya nilai pengetahuan</strong>','',['class'=>'bg-warning text-white']);
+echo '</div>';
+
 //Nilai Mat
+
 echo '<div class="mb-3 row">';
 echo form_label('Nilai Matematika', 'nilai_mat',['class'=>'col-sm-2 col-form-label']);
 echo '<div class="col-sm-10">';
@@ -215,36 +221,3 @@ echo form_close();
 ?>
 
 </div>
-<script>
-      $('#sekolah_asal').select2({
-        placeholder: '--- Daftar Sekolah ---',
-        ajax: {
-          url: '<?php echo site_url('daftar/namasekolah');?>',
-          dataType: 'json',
-          delay: 250,
-          processResults: function(data){
-            return {
-              results: data
-            };
-          },
-          cache: true
-        }
-      });
-</script>
-
-<script>
-
-    $("#cari").select2(function(){
-      // event.preventDefault();
-      var str=  $("#cari").val();
-      if(str == "") {
-        $( "#pendaftar" ).html("<b>Data pendaftar ...</b>");
-      }
-      else {
-        $.get("<?php echo site_url();?>/verifikasi/cari?cari="+str, function( data ){
-        $( "#pendaftar" ).html( data );
-        });
-        }
-     });
-
-  </script>

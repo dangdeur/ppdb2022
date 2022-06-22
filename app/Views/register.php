@@ -45,15 +45,14 @@
             </div>
           </div>
 
-          </div>
-
-          <div class="row">
-            <div class="col-12 col-sm-4">
+          <!-- <div class="row"> -->
+            <div class="col">
               <button type="submit" class="btn btn-primary">Daftar Akun</button>
             </div>
-            <div class="col-12 col-sm-8 text-right">
+            <div class="col text-right">
               <a href="<?php echo site_url('users') ?>">Sudah mempunyai akun</a>
             </div>
+          </div>
           </div>
         </form>
       </div>

@@ -6,13 +6,58 @@ class PersonalModel extends Model{
   protected $table = 'pendaftar';
   protected $primaryKey = 'id_pendaftar';
   protected $useAutoIncrement = true;
-  protected $allowedFields = ['id_pendaftar','id_users', 'no_pendaftaran', 'nisn', 'nama_pendaftar',
+  protected $allowedFields = ['id_users', 'no_pendaftaran', 'nisn', 'nama_pendaftar',
                             'jk','tempat_lahir','tanggal_lahir','alamat','nama_bapak','nama_ibu',
-                            // 'nama_wali','pekerjaan_bapak','pekerjaan_ibu','pekerjaan_wali',
                             'no_telepon','no_wa','no_kip','no_kks',
                             'verifikasi','status_pendaftaran','updated_at'];
   protected $beforeInsert = ['beforeInsert'];
   protected $beforeUpdate = ['beforeUpdate'];
+
+  public function __construct() {
+    //public $builder;
+	   	  $db      = \Config\Database::connect();
+		    //$builder = $db->table('pendaftar');
+    }
+
+  // public function updateDataPersonal($no_pendaftaran,$data_personal_baru) {
+  //   $builder->where('no_pendaftaran',$no_pendaftaran);
+  //   $builder->update($data_personal_baru);
+  // }
+  function simpan($data)
+  {
+    //$this->save($data); //nambah record
+
+    // tidak ada apa2
+    // $this->where('id_pendaftar',$data['id_pendaftar'])
+    //   ->set($data)
+    //  ->update();
+
+    //semua pendaftar jadi  berubah
+     // $this->update($data['id_pendaftar'],$data);
+
+     //
+     $id=$data['id_pendaftar'];
+     unset($data['id_pendaftar']);
+     $this->set($data);
+     $this->where('id_pendaftar',$id);
+      $this->update();
+
+  }
+  function updateDataPersonal($data,$id_pendaftar)
+  {
+    $db      = \Config\Database::connect();
+    // $builder = $db->table('pendaftar');
+    // $builder->set($data);
+    // $builder->where('id_pendaftar',$id);
+    // $builder->update();
+
+    $db->table('pendaftar')
+    	 ->where('id_pendaftar',$id_pendaftar)
+         ->set($data)
+    	 ->update();
+
+
+  }
 
   function pendaftar($cari){
     $db      = \Config\Database::connect();

@@ -1,12 +1,88 @@
+<?php
+echo "<h1>Menu reset saat ini ditiadakan, isi list di grup untuk permintaan reset</h1>";
+header( "refresh:5;url=http://ppdb.smkn2pandeglang.sch.id");
+exit();
+?>
+
+
+
+//$conn = new mysqli('localhost', 'root', 'H@rares3', 'ppdb2022');
+
+function ubah($email) {
+//$conn = new mysqli('localhost', 'root', '', 'ppdb2022');
+$conn = new mysqli('localhost', 'root', 'H@rares3', 'ppdb2022');
+  if ($conn->connect_error) {
+    die("Tidak terkoneksi : " . $conn->connect_error);
+  }
+
+  $pass_1234 = '$2y$10$Qk317sTvbZoGKQ32yVHfJudVxFhMmlNdNey3RPo1CI4qnm72Qckfe';
+//$pass_baru = mysqli_real_escape_string($pass_1234);
+  $email_="'".$email."'";
+  $sql = "UPDATE `users` SET `password`='\$2y\$10\$Qk317sTvbZoGKQ32yVHfJudVxFhMmlNdNey3RPo1CI4qnm72Qckfe' WHERE `email`='".$email."'";
+  //echo $sql;
+    $update=$conn->query($sql);
+
+    // $sql_u= sprintf("UPDATE users SET password='%s' WHERE email='$email_'",
+    //     mysqli_real_escape_string($conn, $pass_1234));
+    // $update = mysqli_query($conn, $sql_u);
+
+    if ($update) {
+      $a=TRUE;
+    }
+    else {
+      $a=FALSE;
+    }
+  return $a;
+
+  }
+
+  function sanitasi($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //$conn = new mysqli('localhost', 'root', '', 'ppdb2022');
+  $conn = new mysqli('localhost', 'root', 'H@rares3', 'ppdb2022');
+  $email_p = sanitasi($_POST["email"]);
+
+  $email="'".$email_p."'";
+  $q = "SELECT * from users WHERE email=".$email;
+  $hasil=$conn->query($q);
+  $row = $hasil->fetch_assoc();
+
+  // echo "<pre>";
+  // print_r($hasil);
+
+  if (isset($row) && count($row) > 0) {
+
+      if ($email_p == $row["email"])
+      {
+        $x=ubah($row['email']);
+        if (isset($x)) {
+        $e="<h3>Password berhasil direset,</h3>
+                <p>password baru anda adalah : 1234 . Setelah berhasil login, harap diganti
+                sesuai keinginan di menu Ubah Akun</p>";
+        } else {
+          $e="<h4>Error reset, mohon diingat kembali email yang digunakan saat pendaftaran akun.</h4>";
+        }
+      }
+    }
+    else {
+      $e = "<h4>data email yang anda masukan tidak terdapat didalam database</h4>";
+    }
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>PPDB SMKN 2 Pandeglang</title>
 	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-	<!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+	<link href="assets/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
 
@@ -23,7 +99,7 @@
 		html, body {
 			color: rgba(33, 37, 41, 1);
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-			font-size: 18px;
+			font-size: 16px;
 			margin: 0;
 			padding: 0;
 			-webkit-font-smoothing: antialiased;
@@ -117,8 +193,7 @@
 			padding: 2.5rem 1.75rem 3.5rem 1.75rem;
 		}
 		section h1 {
-			/* margin-bottom: 2.5rem; */
-			margin-bottom: 1 rem;
+			margin-bottom: 2.5rem;
 		}
 		section h2 {
 			font-size: 120%;
@@ -195,36 +270,32 @@
 				color: rgba(255, 255, 255, .8);
 			}
 		}
-
 	</style>
+
+
 </head>
 <body>
 
-<!-- HEADER: MENU + HEROE SECTION -->
-<header>
+  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<h1>Menu reset password</h1>
+  Email : <input type="text" name="email" class="form-control" placeholder="Masukan email yang sudah terdaftar"><br>
+<br />
+  <input type="submit" class="btn btn-danger" value="RESET">
+<a href="http://ppdb.smkn2pandeglang.sch.id/" class="btn btn-warning">Kembali ke Situs PPDB</a>
+  </form>
 
-	<div class="menu">
-		<ul>
-			<li class="logo"><a href="<?= WEB ?>" target="_blank">
-													<img height="35" title="<?= SEKOLAH ?>"
-															alt="<?= SEKOLAH ?>"
-															src="<?php echo base_url('assets/gambar/logo.jpg'); ?>">
-												</a>
-			</li>
-			<li class="menu-toggle">
-				<button onclick="toggleMenu();">&#9776;</button>
-			</li>
-			<li class="menu-item hidden"><a href="<?php echo site_url('info') ?>">Info</a></li>
-			<li class="menu-item hidden"><a href="<?php echo site_url('info/bantuan') ?>">Bantuan</a></li>
-			<li class="menu-item hidden disabled"><a href="<?php echo site_url('users') ?>">Login/Daftar</a>
-			<!-- <li class="menu-item hidden"><a href="<?php echo site_url('users/logout') ?>">Keluar</a> -->
+<?php
+if (isset($e))
+{
+  echo $e;
+}
 
 
-	</div>
 
-	 <div class="heroe">
-		<h1><?= SITUS ?></h1>
-		<!--<h2><?= JARGON ?></h2>-->
-	</div>
 
-</header>
+
+
+//$conn->close();
+?>
+</body>
+</html>

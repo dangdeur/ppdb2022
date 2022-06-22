@@ -79,6 +79,20 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('admin/cekPendaftaran') ?>">
+              <span data-feather="file"></span>
+              Cek Pendaftaran
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo site_url('admin/reset') ?>">
+              <span data-feather="file"></span>
+              Reset Akun
+            </a>
+          </li>
+
 
       </div>
     </nav>

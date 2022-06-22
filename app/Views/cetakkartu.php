@@ -70,6 +70,8 @@
 <br /><br />
 Keterangan :
 <ul>
+<li>Mohon memastikan kesesuaian data sehari sebelum verifikasi/ujian</li>
+<li>Peserta hadir di tempat ujian 30 menit sebelum pelaksanaan ujian</li>
 <li>Kartu Seleksi PPDB ini dicetak 1 lembar dan ditempeli pas foto yang jelas. Digunakan untuk syarat mengikuti Seleksi PPDB. Kartu Tes hanya ditunjukan ke pengawas ruang ujian</li>
 <li>Ujian Seleksi PPDB dilakukan berbasis komputer di Kampus SMKN 2 Pandeglang</li>
 <li>Ujian Seleksi PPDB meliputi,

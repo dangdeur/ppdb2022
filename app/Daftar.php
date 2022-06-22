@@ -26,10 +26,6 @@ class Daftar extends BaseController
 	// }
 
 	public function personal(){
-		if (PENDAFTARAN == 'TUTUP')
-		{
-			return redirect()->to(site_url('users/profil'));
-		}
 		$data = [];
 		helper(['form']);
 		$data=$this->session->get();
@@ -37,7 +33,7 @@ class Daftar extends BaseController
 		if ($this->request->getMethod() == 'post') {
 
 			$ketentuan = [
-				'nisn' => 'required|numeric|min_length[10]',
+				'nisn' => 'required|numeric|min_length[10]|is_unique[pendaftar.nisn]',
 				'jk' => 'required',
 				'tempat_lahir' => 'required',
 				'tgl' => 'required',
@@ -59,7 +55,8 @@ class Daftar extends BaseController
 			$errors = [
 				'nisn'=> ['required'=>'NISN belum diisi',
 									'min_length'=>'Isian NISN kurang dari 10 digit',
-									'numeric'=>'NISN hanya boleh berisi angka'
+									'numeric'=>'NISN hanya boleh berisi angka',
+									'is_unique' => 'NISN tidak valid atau sudah digunakan'
 								],
 				'jk'=>['required'=> 'Jenis kelamin belum dipilih'],
 				'tempat_lahir'=> ['required'=>'Tempat kelahiran anda belum diisi'],
@@ -146,10 +143,6 @@ class Daftar extends BaseController
 	}
 
 	public function nilai($no){
-		if (PENDAFTARAN == 'TUTUP')
-		{
-			return redirect()->to(site_url('users/profil'));
-		}
 		$data = [];
 		helper(['form']);
 		$data=$this->session->get();
@@ -325,7 +318,7 @@ class Daftar extends BaseController
 				];
 
 				$model->insert($DataNilaiBaru);
-				$this->setStatus($no,2);
+				$this->setStatus($data['id_users'],2);
 				$session = session();
 				$session->setFlashdata('success', 'Data Nilai/Sekolah telah disimpan');
 				return redirect()->to('users/profil');
@@ -341,10 +334,6 @@ class Daftar extends BaseController
 
 
 	public function ppdb($no_pendaftaran){
-		if (PENDAFTARAN == 'TUTUP')
-		{
-			return redirect()->to(site_url('users/profil'));
-		}
 		$data = [];
 		helper(['form']);
 		$data=$this->session->get();
@@ -383,7 +372,7 @@ class Daftar extends BaseController
 				];
 
 				$model->insert($DatappdbBaru);
-				$this->setStatus($no_pendaftaran,3);
+				$this->setStatus($data['id_users'],3);
 				$session = session();
 				$session->setFlashdata('success', 'Data pendaftaran PPDB telah disimpan');
 				return redirect()->to('users/profil');
@@ -492,13 +481,13 @@ class Daftar extends BaseController
 		return $builder->countAll()+1;
 	}
 
-	public function setStatus($no_pendaftaran,$status)
+	public function setStatus($id_users,$status)
 	{
 		//	$db      = \Config\Database::connect();
 		$data = ['status_pendaftaran' => $status];
 		$db = db_connect();
 		$builder = $db->table('pendaftar');
-		$builder->where('no_pendaftaran', $no_pendaftaran);
+		$builder->where('id_users', $id_users);
 		$builder->update($data);
 
 	}
@@ -542,7 +531,7 @@ class Daftar extends BaseController
 			break;
 
 			case $no_urut<=1120:
-					$tes='24 Juni 2022 Sesi 2 (13.00)';
+					$tes='24 Juni 2022 Sesi 2 (10.30)';
 			break;
 
 			case $no_urut<=1260:
@@ -551,14 +540,6 @@ class Daftar extends BaseController
 
 			case $no_urut<=1400:
 					$tes='25 Juni 2022 Sesi 2 (10.30)';
-			break;
-
-			case $no_urut<=1540:
-					$tes='27 Juni 2022 Sesi 1 (08.00)';
-			break;
-
-			case $no_urut<=1680:
-					$tes='27 Juni 2022 Sesi 2 (10.30)';
 			break;
 
 
@@ -580,19 +561,12 @@ return $tes;
 
 	}
 
-	public function edit($no)
+	public function edit__($no)
 	{
-		if (PENDAFTARAN == 'TUTUP')
-		{
-			return redirect()->to(site_url('users/profil'));
-		}
 		helper(['form']);
 		$data=$this->session->get();
 
-		//$db = new PersonalModel();
-		//$db = \Config\Database::connect();
-
-			$db      = \Config\Database::connect();
+		$db = \Config\Database::connect();
 		$builder = $db->table('pendaftar');
 		$builder->where('pendaftar.no_pendaftaran',$no);
 		$builder->join('nilai','nilai.no_pendaftaran=pendaftar.no_pendaftaran');
@@ -602,14 +576,14 @@ return $tes;
 		foreach ($query->getRow() as $key => $value) {
 				$data[$key]=$value;
 		}
-		//$data['no_pendaftaran']=$no_pendaftaran;
 
-		//////////post
+		/////////////aaaaaaaaaaaa
 		if ($this->request->getMethod() == 'post') {
-			$no_pendaftaran=$this->request->getVar('no_pendaftaran');
-			$id_pendaftar=$this->request->getVar('id_pendaftar');
+
+
 			$ketentuan = [
-				 // 'nisn' => "required|numeric|min_length[10]|is_unique[pendaftar.nisn,no_pendaftaran,$no_pendaftaran]",
+				//'nisn' => 'required|numeric|min_length[10]|is_unique[pendaftar.nisn,id_pendaftar,{id_pendaftar}]',
+				'nisn' => 'required|numeric|min_length[10]',
 				'jk' => 'required',
 				'tempat_lahir' => 'required',
 				'tanggal_lahir' => 'required',
@@ -623,7 +597,7 @@ return $tes;
 				'nisn'=> ['required'=>'NISN belum diisi',
 									'min_length'=>'Isian NISN kurang dari 10 digit',
 									'numeric'=>'NISN hanya boleh berisi angka'
-									// 'is_unique' => 'NISN tidak valid atau sudah digunakan'
+									//'is_unique' => 'NISN tidak valid atau sudah digunakan'
 								],
 				'jk'=>['required'=> 'Jenis kelamin belum dipilih'],
 				'tempat_lahir'=> ['required'=>'Tempat kelahiran anda belum diisi'],
@@ -638,19 +612,17 @@ return $tes;
 				$data['validation'] = $this->validator;
 				echo view('header_l',$data);
 				echo view('editpendaftaran',$data);
-				return;
+        return;
 
 			}else{
-				//$model_personal = new PersonalModel();
-				$no_pendaftaran = $this->request->getVar('no_pendaftaran');
+				$model_personal = new PersonalModel();
+	$id_pendaftar = $this->request->getVar('id_pendaftar');
 				$tgl=explode("-",$this->request->getVar('tanggal_lahir'));
 				$tanggal_lahir = $tgl[2]."-".$tgl[1]."-".$tgl[0];
 				//$alamat = $this->request->getVar('jalan')." ".$this->request->getVar('kampung')." ".$this->request->getVar('kelurahan')." ".$this->request->getVar('rt')." ".$this->request->getVar('rw')." ".$this->request->getVar('kecamatan')." ".$this->request->getVar('kabupaten');
-
+				$id_pendaftar = $this->request->getVar('id_pendaftar');
 				$data_personal_baru = [
-					// 'id_pendaftar'=>$id_pendaftar,
 					'nama_pendaftar' => $this->request->getVar('nama_pendaftar'),
-						// 'no_pendaftaran' => $this->request->getVar('no_pendaftaran'),
 					'nisn' => $this->request->getVar('nisn'),
 					'jk' => $this->request->getVar('jk'),
 					'tempat_lahir' => $this->request->getVar('tempat_lahir'),
@@ -663,11 +635,11 @@ return $tes;
 					'no_kip'=>$this->request->getVar('no_kip'),
 					'no_kks'=>$this->request->getVar('no_kks')
 				];
-////////////////////////////////
 
-				$this->update('pendaftar','no_pendaftaran',$no_pendaftaran,$data_personal_baru);
+				$model_personal->update($id_pendaftar,$data_personal_baru);
 
-				////////////////////////nilai
+				$model_nilai = new NilaiModel();
+				$id_nilai = $this->request->getVar('id_nilai');
 				$data_nilai_baru = [
 					'sekolah_asal'=>$this->request->getVar('sekolah_asal'),
 					'tahun_lulus'=>$this->request->getVar('tahun_lulus'),
@@ -695,79 +667,36 @@ return $tes;
 					'nilai_ipa3'=>$this->request->getVar('nilai_ipa3'),
 					'nilai_ipa4'=>$this->request->getVar('nilai_ipa4'),
 					'nilai_ipa5'=>$this->request->getVar('nilai_ipa5')
+
 				];
-					$this->update('nilai','no_pendaftaran',$no_pendaftaran,$data_nilai_baru);
-				////////////////////
 
+				$model_nilai->update($id_nilai,$data_nilai_baru);
 
-				///////////// PK
-
+				$model_pendaftaran = new PendaftaranModel;
+				$id_pendaftaran = $this->request->getVar('id_pendaftaran');
 				$data_pendaftaran_baru = [
 					'program_keahlian_1'=>$this->request->getVar('program_keahlian_1'),
 					'program_keahlian_2'=>$this->request->getVar('program_keahlian_2')
 				];
-					$this->update('pendaftaran','no_pendaftaran',$no_pendaftaran,$data_pendaftaran_baru);
-				/////////////////
+
+					$model_pendaftaran->update($id_pendaftaran,$data_pendaftaran_baru);
+
 				$session = session();
 				$session->setFlashdata('success', 'Perubahan data pendaftaran PPDB 2022 di SMKN 2 Pandeglang telah berhasil diperbaharui');
 				return redirect()->to('users/profil');
-				//echo view('tes',$data);
 
 			}
 		}
-
-
+		////////////aaaaaaaaaaaaa
 		echo view('header_l', $data);
-		 echo view('editpendaftaran',$data);
+		echo view('editpendaftaran',$data);
 		echo view('footer');
-		}
-
-
-		public function tampilArr($arr)
-		{
-			echo "<pre>";
-			print_r($arr);
-		}
 
 
 
-public function update($tabel,$kolom,$nilai_kolom,$data)
-{
-	$db = db_connect();
-	$builder=$db->table($tabel);
-	$builder->set($data);
-	$builder->where($kolom, $nilai_kolom);
-	$builder->update($data);
-	return TRUE;
-}
-
-public function delete($tabel,$kolom,$nilai_kolom)
-{
-	$db = db_connect();
-	$builder=$db->table($tabel);
-	$builder->where($kolom, $nilai_kolom);
-	$sql=$builder->delete();
-	return $sql;
-}
-
-public function sql_update($tabel,$kolom,$nilai_kolom,$data)
-{
-	$db = db_connect();
-	$builder=$db->table($tabel);
-	$builder->set($data);
-	$builder->where($kolom, $nilai_kolom);
-	$sql=$builder->getCompiledUpdate();
-	return $sql;
-}
-
-public function tutup()
-{
-	if (PENDAFTARAN == 'TUTUP')
-	{
-		$attr='disabled';
-		return $attr;
 	}
-}
+
+
 	//--------------------------------------------------------------------
 
 }

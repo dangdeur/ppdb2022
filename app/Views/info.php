@@ -1,6 +1,97 @@
+<h1 class="bg-warning text-white text-center">Pendaftaran ditutup tanggal 20 Juni 2022 pukul 23.59</h1>
 
+<?php
+// echo "<pre>";
+// print_r($PK1);
+ ?>
 
 <!-- CONTENT -->
+<div class="hero">
+        <section>
+                <h1>PENGUMUMAN</h1>
+		<p>
+		<ul>
+      <li>Bagi peserta PPDB yang akan verifikasi dan ujian, dimohon untuk menerapkan protokol kesehatan pencegahan Covid-19 (Menggunakan Masker)</li>
+      <li><div class="fw-bolder bg-success text-white">Bagi yang bermasalah dengan pendaftaran, bisa datang ke Kampus SMKN 2 Pandeglang Senin 20 Juni 2022</div></li>
+      <li><div class="fw-bolder">UNTUK YANG UJIAN DAN VERIFIKASI TANGGAL 24 JUNI 2022 SESI 2 10.30, WAKTU PELAKSANAANYA DIUNDUR KE JAM 13.00</div></li>
+      <li>NISN bisa diubah dari menu "ubah Data" dibawah nama peserta</li>
+      <li>Menu reset secara mandiri telah dihilangkan, apabila butuh reset, silahkan buat list di grup</li>
+      <li><div class="text-decoration-line-through">Bagi peserta yang muncul error "Whoops...",
+        mohon menunggu. Setelah ada solusi, akan kami infokan kembali disini</div>
+        <div class="fw-bolder bg-primary text-white">Perbaikan error "whoops" telah dilakukan sejak jumat 17-06-2022 sore, lakukan ubah data
+        apabila diperlukan</div><br />
+      </li>
+    <li>Saat ini sudah tersedia media komunikasi melalui  <a href="https://t.me/+N5QyoJLThzVlNTg1" class="btn btn-primary">Grup telegram PPDB</a> Silahkan bergabung
+      </li>
+		<li>Bagi yang sudah mempunyai akun di PPDB SMKN 2 Pandeglang, tidak perlu membuat akun lagi</li>
+    <!-- <li>Bagi yang mengalami tampilan error "Whoops!", </li> -->
+    <!-- <li>Menu perubahan data saat ini masih belum tersedia,
+      perubahan data dapat dilakukan secara mandiri apabila sudah tersedia,
+      atau ketika Ujian/Verifikasi di SMKN 2 Pandeglang.</li> -->
+		<li><div class="text-decoration-line-through">Menu perubahan data saat ini masih belum tersedia,
+			perubahan data dapat dilakukan secara mandiri apabila sudah tersedia,
+      atau ketika Ujian/Verifikasi di SMKN 2 Pandeglang.</div>
+    <div class="fw-bolder bg-primary text-white">Menu perbaikan data sudah tersedia setelah login.
+      Data personal, nilai, dan pilihan jurusan dapat diubah selama belum dilakukan verifikasi
+      berkas oleh panitia</div></li><br />
+    <li>Bagi yang lupa password, klik tombol berikut
+      <a href="<?php echo base_url('reset.php') ?>" class="btn btn-warning">RESET PASSWORD</a>
+     </li>
+    </ul>
+		</p>
+      </section>
+</div>
+
+<div class="further">
+  <section>
+    <h1>Jumlah Pendaftar</h1>
+  	<p>
+		<ul>
+      <div class="fw-bolder">
+		 <li>Akun Pengguna terdaftar : <?= $pengguna ?></li>
+     <li>Jumlah Pendaftar  : <?= $pendaftar ?></li>
+    
+
+    </div>
+    <li>
+      Peminat Jurusan (Pilihan 1):
+      <ul>
+        <?php
+        for ($a=0;$a<count($PK1);$a++)
+        {
+          if($PK1[$a]['program_keahlian_1'] !='---')
+          {
+          echo "<li>".$PK1[$a]['program_keahlian_1']." : ".$PK1[$a]['jumlah']." pendaftar</li>";
+          }
+        }
+        ?>
+
+      </ul>
+    </li>
+
+    <li>
+      Peminat Jurusan (Pilihan 2):
+      <ul>
+        <?php
+        for ($b=0;$b<count($PK2);$b++)
+        {
+          if($PK2[$b]['program_keahlian_2'] !='---')
+          {
+          echo "<li>".$PK2[$b]['program_keahlian_2']." : ".$PK2[$b]['jumlah']." pendaftar</li>";
+          }
+        }
+        ?>
+
+      </ul>
+    </li>
+
+    </ul>
+		</p>
+      </section>
+</div>
+
+
+
 
 <div class="heroe">
 	<section>
@@ -21,7 +112,7 @@
 
 <div class="further">
 	<section>
-		<h1>Program Keahlian Dan Kuota</h1>
+		<h1>Konsentrasi Keahlian Dan Kuota</h1>
 		<p>
 			<ul>
 				<li><?= PK1 ?></li>
@@ -31,6 +122,7 @@
 				<li><?= PK5 ?></li>
 				<li><?= PK6 ?></li>
 				<li><?= PK7 ?></li>
+				<li><?= PK8 ?></li>
 			</ul>
 		</p>
 	</section>

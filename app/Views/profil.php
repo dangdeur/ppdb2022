@@ -2,34 +2,36 @@
 
 <!--  -->
     <div class="mb-3">
-      <h2>Halo <?= $firstname ." ". $lastname ?>,</h2>
+      <h2>Halo <?= $firstname ." ". $lastname ?></h2>
     </div>
 <?php
+
 if ($jenis_user==0) {
 if (isset($status) && !is_null($status))
 {
   ?>
   <div class="mb-3">
-    <label class="col-sm-4 form-label"><h3>Status pendaftaran PPDB 2022 </h3></label><br />
+    <label class="col-sm-12 form-label"><h3>Status pendaftaran - Nomor Peserta : <?= $no_pendaftaran ?></label></h3>
     <h4 class="bg-warning text-white"><?= $status ?></h4>
 
     <br /><hr />
     <?php
 }
-    if (isset($status_pendaftaran) && $status_pendaftaran>=3)
+    if (isset($status_pendaftaran) && $status_pendaftaran<=3)
     {
+
      ?>
     <a href="<?php echo site_url('cetak/pendaftaran/'.$no_pendaftaran) ?>" target="_blank" class="btn btn-success">Cetak Bukti Pendaftaran</a>
     <a href="<?php echo site_url('cetak/kartu/'.$no_pendaftaran) ?>" target="_blank" class="btn btn-primary">Cetak Kartu Tes</a>
-      <a href="<?php echo site_url('daftar/edit/'.$no_pendaftaran) ?>" class="btn btn-warning">Ubah Data</a>
-        <a href="<?php echo site_url('daftar/hapus/'.$no_pendaftaran) ?>" class="btn btn-danger">Hapus Pendaftaran</a>
+      <a href="<?php echo site_url('daftar/edit/'.$no_pendaftaran) ?>" class="btn btn-warning <?= $attr ?>">Ubah Data</a>
+        <!-- <a href="<?php //echo site_url('daftar/hapus/'.$no_pendaftaran) ?>" class="btn btn-danger">Hapus Pendaftaran</a> -->
   <?php }
-  if (isset($status_pendaftaran) && $status_pendaftaran<3 && $status_pendaftaran>0) {
-    //else {
-    // echo '<h4 class="text-warning bg-dark">Isian belum lengkap<h4>';
-    echo '<a href="'.site_url('cetak/pendaftaran/'.$no_pendaftaran).'" target="_blank" class="btn btn-success disabled">Cetak Bukti Pendaftaran</a>';
-    echo '<a href="'.site_url('cetak/kartu/'.$no_pendaftaran).'" target="_blank" class="btn btn-warning disabled">Cetak Kartu Tes</a>';
-  }
+  // if (isset($status_pendaftaran) && $status_pendaftaran<3 && $status_pendaftaran>0) {
+  //   //else {
+  //   // echo '<h4 class="text-warning bg-dark">Isian belum lengkap<h4>';
+  //   echo '<a href="'.site_url('cetak/pendaftaran/'.$no_pendaftaran).'" target="_blank" class="btn btn-success disabled">Cetak Bukti Pendaftaran</a>';
+  //   echo '<a href="'.site_url('cetak/kartu/'.$no_pendaftaran).'" target="_blank" class="btn btn-warning disabled">Cetak Kartu Tes</a>';
+  // }
   ?>
   </div>
 
@@ -81,9 +83,10 @@ if (!$personal)
     </tr>
     <tr>
       <td>No Kartu Program</td>
-      <td>KIP : <?=$no_kip ?> | KKS : <?=$no_kks ?></td>
+      <td>KIP : <?=$no_kip ?> | KKS/PKH : <?=$no_kks ?></td>
     </tr>
 <?php
+//echo $nilai;
 if (!$nilai)
 {
  ?>
@@ -217,16 +220,22 @@ else
       ?>
         </td>
   </tr>
+<?php
+if ($nilai && !$pendaftaran)
+{
+ ?>
+  <tr><td colspan="2"><h3>3. Data Pendaftaran </h3>
+        <a href="<?php echo site_url('daftar/ppdb/'.$no_pendaftaran) ?>" class="btn btn-primary">Isi data pendaftaran PPDB</a>
+        </td>
+    </tr>
   <?php
 }
-
+}
+//echo $pendaftaran;
 if (!$pendaftaran)
 {
  ?>
-    <tr><td colspan="2"><h3>3. Data Pendaftaran </h3>
-          <a href="<?php echo site_url('daftar/ppdb/'.$no_pendaftaran) ?>" class="btn btn-primary">Isi data pendaftaran PPDB</a>
-          </td>
-      </tr>
+
 <?php
 }
 else {

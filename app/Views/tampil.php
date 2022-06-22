@@ -1,7 +1,6 @@
-<div class="col-sm-10 table-responsive">
-     <!-- Search form -->
+
      <form method='get' action="<?php echo site_url('paginasi/tampilSemua') ?>" id="searchForm">
-       <input type='text' name='search' value='<?= $search ?>'><input type='button' id='btnsearch' value='Submit' onclick='document.getElementById("searchForm").submit();'>
+       <input type='text' name='search' value='<?= $search ?>'><input type='button' id='btnsearch' value='Cari' onclick='document.getElementById("searchForm").submit();'>
      </form>
      <br/>
 
