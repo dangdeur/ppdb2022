@@ -4,6 +4,8 @@ use App\Models\UserModel;
 use App\Models\PersonalModel;
 use App\Models\NilaiModel;
 use App\Models\PendaftaranModel;
+use App\Models\PengolahanModel;
+use CodeIgniter\I18n\Time;
 
 
 class Users extends BaseController
@@ -203,6 +205,7 @@ class Users extends BaseController
 			 		$data[$keyp]=$valuep;
 		}
 	//$no_pendaftaran=$data['no_pendaftaran'];
+
 		if ($this->cekNilai($data['id_users']))
 			{
 
@@ -220,6 +223,7 @@ class Users extends BaseController
 			{
 				$data['nilai']=FALSE;
 			}
+
 
 			if ($this->cekPendaftaran($data['id_users']))
 				{
@@ -240,23 +244,42 @@ class Users extends BaseController
 				{
 					$data['pendaftaran']=FALSE;
 				}
-// echo "<pre>";
-// print_r($data);
-				$x=$data['status_pendaftaran'];
+
+
+				//echo $ver;
+							if ($data['verifikasi'] != '') {
+								$x=4;
+							}
+							else {
+									$x=$data['status_pendaftaran'];
+							}
+							//echo $x;
+
+	$x=$data['status_pendaftaran'];
+	// if ($data['verifikasi'] != '') {
+	// 	$x=4;
+	// }
+
 				switch ($x) {
-					case $x <3:
-						$data['status']='Pengisian Form';
-						break;
-					case $x =3:
-						$data['status']='Menunggu Ujian Seleksi & Verifikasi berkas';
-						break;
-					case $x =4:
-						$data['status']='Menunggu Hasil Tes';
-						break;
-					case $x =5:
-						$data['status']='Sudah Ditetapkan';
-						break;
+				case $x == 5:
+					$data['status']='Sudah Ditetapkan';
+					break;
+				case $x == 4:
+					$data['status']='Sudah verifikasi berkas';
+					break;
+				case $x == 3:
+					$data['status']='Menunggu Ujian Seleksi & Verifikasi berkas';
+					break;
+				case $x == 2:
+					$data['status']='Pengisian Form Nilai';
+					break;
+				case $x == 1:
+					$data['status']='Pengisian Form Personal';
+					break;
 				}
+
+
+
 		}
 
 		//OK
@@ -292,11 +315,27 @@ class Users extends BaseController
 		//  	 }
 		//  }
 		$data['attr']=$this->tutup();
+		//$data['skor']=$this->skor($data['no_pendaftaran']);
+		if ($data['verifikasi'] !='')
+		{
+		$data=array_merge($data,$this->progress($data['verifikasi']),$this->skor($data['no_pendaftaran']));
+		}
 
 		echo view('header_l', $data);
 		echo view('profil',$data);
 		echo view('footer');
 	 }
+
+	public function skor($no_pendaftaran)
+	{
+		$model = new PengolahanModel();
+		$query = $model->where('no_pendaftaran',$no_pendaftaran);
+		$h=$query->get();
+		foreach ($h->getRow() as $key => $value) {
+				$data[$key]=$value;
+		}
+		return $data;
+	}
 
 	public function cekPersonal($id)
 	{
@@ -405,6 +444,31 @@ class Users extends BaseController
 				return $attr;
 			}
 		}
+
+		public function progress($verifikasi)
+		{
+
+			helper('date');
+			$ver=json_decode($verifikasi);
+			//print_r($ver);
+			$data['petugas']=$ver->petugas;
+		  // $waktu_= new DateTime($jadwal_verifikasi);
+	    // $waktu_->add(new DateInterval('PT12H'));
+	    // $waktu=$waktu_->format("d-m-Y H:m:s");
+
+			 $waktu=Time::parse($ver->waktu,'Asia/Jakarta');
+			 $tgl = explode(" ",$waktu);
+			 $tanggal_=explode("-",$tgl[0]);
+			 $tanggal=$tanggal_[2]."-".$tanggal_[1]."-".$tanggal_[0];
+			//$waktu=$waktu_->addHours(12);
+			$data['waktu']=$tgl[1];
+			$data['tanggal']=$tanggal;
+			//$data['waktu']=$waktu_->toLocalizedString('d-m-yyyy HH:mm:s');
+	    return $data;
+
+		}
+
+		//public ubahTangga
 	//--------------------------------------------------------------------
 
 }

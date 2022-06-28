@@ -70,12 +70,9 @@ if(!empty($pendaftar ))
 
       foreach ($pendaftar as $data)
 	   {
-       if(isset($data->verifikasi) &&  $data->verifikasi !='')
-       {
-         $class=' class="table-success"';
-       }
+
            $outputdata .= '
-                          <tr'.$class.'>
+                          <tr'.$data->class.'>
                           <td>'.$data->no_pendaftaran.'</td>
                           <td>'.$data->nisn.'</td>
 		                      <td>'.$data->nama_pendaftar.'</td>

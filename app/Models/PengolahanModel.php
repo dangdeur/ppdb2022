@@ -2,14 +2,12 @@
 
 use CodeIgniter\Model;
 
-class PendaftaranModel extends Model{
-  protected $table = 'pendaftaran';
-  protected $primaryKey = 'id_pendaftaran';
+class PengolahanModel extends Model{
+  protected $table = 'pengolahan';
+  protected $primaryKey = 'id_pengolahan';
   protected $useAutoIncrement = true;
-  protected $allowedFields = ['id_pendaftaran','id_users', 'no_pendaftaran',
-                              'program_keahlian_1','program_keahlian_2',
-                              'waktu_ujian','password_ujian',
-                            'updated_at'];
+  protected $allowedFields = ['id_pengolahan','id_users', 'no_pendaftaran',
+                              'skor_raport','skor_prestasi','skor_tes','mulai_tes','selesai_tes'];
   protected $beforeInsert = ['beforeInsert'];
   protected $beforeUpdate = ['beforeUpdate'];
 

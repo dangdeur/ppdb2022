@@ -12,7 +12,16 @@ if (isset($status) && !is_null($status))
   ?>
   <div class="mb-3">
     <label class="col-sm-12 form-label"><h3>Status pendaftaran - Nomor Peserta : <?= $no_pendaftaran ?></label></h3>
-    <h4 class="bg-warning text-white"><?= $status ?></h4>
+    <h4 class="bg-warning text-white"><?= $status ?> </h4>
+    <?php
+    if (isset($petugas))
+    {
+    ?>
+
+    Verifikator : <?= $petugas==" " ? 'Admin PPDB' : $petugas ?> <br />
+    Tanggal verifikasi : <?= $tanggal." ".$waktu ?><br />
+
+  <?php } ?>
 
     <br /><hr />
     <?php
@@ -26,6 +35,8 @@ if (isset($status) && !is_null($status))
       <a href="<?php echo site_url('daftar/edit/'.$no_pendaftaran) ?>" class="btn btn-warning <?= $attr ?>">Ubah Data</a>
         <!-- <a href="<?php //echo site_url('daftar/hapus/'.$no_pendaftaran) ?>" class="btn btn-danger">Hapus Pendaftaran</a> -->
   <?php }
+
+  
   // if (isset($status_pendaftaran) && $status_pendaftaran<3 && $status_pendaftaran>0) {
   //   //else {
   //   // echo '<h4 class="text-warning bg-dark">Isian belum lengkap<h4>';

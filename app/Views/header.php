@@ -215,7 +215,7 @@
 				<button onclick="toggleMenu();">&#9776;</button>
 			</li>
 			<li class="menu-item hidden"><a href="<?php echo site_url('info') ?>">Info</a></li>
-			<li class="menu-item hidden"><a href="<?php echo site_url('info/bantuan') ?>">Bantuan</a></li>
+			<!-- <li class="menu-item hidden"><a href="<?php echo site_url('info/bantuan') ?>">Bantuan</a></li> -->
 			<li class="menu-item hidden disabled"><a href="<?php echo site_url('users') ?>">Login/Daftar</a>
 			<!-- <li class="menu-item hidden"><a href="<?php echo site_url('users/logout') ?>">Keluar</a> -->
 

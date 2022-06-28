@@ -28,12 +28,19 @@ class Verifikasi extends BaseController
 		{
 			echo view('header_a',$data);
 			echo view('verifikasiberkas',$data);
+			echo view('footer_v');
 		}
 	  else
 	  {
 	  	$db= new VerifikasiModel;
 	  	$data['pendaftar']=$db->pendaftar($this->request->getGet('cari'));
 
+			if($data['pendaftar']['verifikasi'] !='')
+			{
+
+				$data['class']=' class="table-success"';
+			}
+			//print_r($data['pendaftar']);
 	  	echo view('hasilcari',$data);
 			echo view('footer_v');
 	  }
@@ -223,7 +230,8 @@ class Verifikasi extends BaseController
 					'no_wa'=>$this->request->getVar('no_wa'),
 					'no_kip'=>$this->request->getVar('no_kip'),
 					'no_kks'=>$this->request->getVar('no_kks'),
-					'verifikasi'=>$verifikator
+					'verifikasi'=>$verifikator,
+					'status_pendaftaran'=>4
 				];
 ////////////////////////////////
 

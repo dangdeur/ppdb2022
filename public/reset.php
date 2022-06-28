@@ -1,5 +1,5 @@
 <?php
-echo "<h1>Menu reset saat ini ditiadakan, isi list di grup untuk permintaan reset</h1>";
+echo "<h1>Reset password akun PPDB saat ini hanya tersedia melalui Telegram Bot</h1>";
 header( "refresh:5;url=http://ppdb.smkn2pandeglang.sch.id");
 exit();
 ?>

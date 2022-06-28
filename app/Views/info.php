@@ -11,6 +11,7 @@
                 <h1>PENGUMUMAN</h1>
 		<p>
 		<ul>
+      <li>Untuk reset password akun PPDB, saat ini hanya kami fasilitasi melalui Telegram Bot</li>
       <li>Bagi peserta PPDB yang akan verifikasi dan ujian, dimohon untuk menerapkan protokol kesehatan pencegahan Covid-19 (Menggunakan Masker)</li>
       <li><div class="fw-bolder bg-success text-white">Bagi yang bermasalah dengan pendaftaran, bisa datang ke Kampus SMKN 2 Pandeglang Senin 20 Juni 2022</div></li>
       <li><div class="fw-bolder">UNTUK YANG UJIAN DAN VERIFIKASI TANGGAL 24 JUNI 2022 SESI 2 10.30, WAKTU PELAKSANAANYA DIUNDUR KE JAM 13.00</div></li>
@@ -50,7 +51,7 @@
       <div class="fw-bolder">
 		 <li>Akun Pengguna terdaftar : <?= $pengguna ?></li>
      <li>Jumlah Pendaftar  : <?= $pendaftar ?></li>
-    
+
 
     </div>
     <li>

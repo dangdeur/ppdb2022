@@ -64,25 +64,46 @@ class Admin extends BaseController
 		return redirect()->to('/');
 	}
 
-	public function cekPendaftaran($email=FALSE)
+	public function cekPendaftaranByEmail($email=FALSE)
 	{
 		$data = $this->session->get();
 		//$db = db_connect();
 		if (!$email) {
-
+			$data[]
 		}
-
 		else {
 
-		}
-		$builder=$this->db->table('users')
+			$builder=$this->db->table('users')
 								->getWhere(['email' => $email]);
 		$data=$builder->getRowArray();
 
 		$data['isian']=$this->cekIsian($data['id_users']);
+		}
+// echo "<pre>";
+// print_r($data);
+		echo view('header_a',$data);
+		echo view('cekpendaftaran',$data);
 
-echo "<pre>";
-print_r($data);
+
+	}
+
+	public function cekPendaftaranById($id=FALSE)
+	{
+		$data = $this->session->get();
+		//$db = db_connect();
+		if (!$id) {
+
+		}
+		else {
+		}
+		$builder=$this->db->table('users')
+								->getWhere(['id_users' => $id]);
+		$data=$builder->getRowArray();
+
+		$data['isian']=$this->cekIsian($data['id_users']);
+
+// echo "<pre>";
+// print_r($data);
 		echo view('header_a',$data);
 		echo view('cekpendaftaran',$data);
 
