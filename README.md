@@ -34,3 +34,11 @@ CI_ENVIRONMENT = development
 => define ('PDF_HEADER_LOGO', 'logo.jpg');  
 => define ('PDF_HEADER_LOGO_WIDTH', 15);  
 => define ('PDF_HEADER_TITLE', 'SMKN 2 Pandeglang');
+
+## Perintah KiBenen_bot  
+Mengecek status pendaftaran  
+=> status <no_pendaftaran>  
+Mengecek HP pendaftar  
+=> cekhp <no HP> <no_pendaftaran>  
+Mereset password akun  
+=> reset <no HP> <no_pendaftaran>  
