@@ -4,7 +4,15 @@
       <div class="container">
         <h3>Pendaftaran Akun</h3>
         <hr>
+        <?php if (isset($validation)): ?>
+          <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+              <?= $validation->listErrors() ?>
+            </div>
+          </div>
+        <?php endif; ?>
         <form class="" action="<?php echo site_url('users/register') ?>" method="post">
+
           <div class="row">
             <div class="col-12 col-sm-6">
               <div class="form-group">
@@ -36,13 +44,7 @@
               <input type="password" class="form-control" name="password_confirm" id="password_confirm" value="">
             </div>
           </div>
-          <?php if (isset($validation)): ?>
-            <div class="col-12">
-              <div class="alert alert-danger" role="alert">
-                <?= $validation->listErrors() ?>
-              </div>
-            </div>
-          <?php endif; ?>
+
           </div>
 
           <div class="row">

@@ -1,7 +1,9 @@
 <?php namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\PendaftarModel;
+use App\Models\PersonalModel;
+use App\Models\NilaiModel;
+use App\Models\PendaftaranModel;
 
 
 class Users extends BaseController
@@ -11,7 +13,6 @@ class Users extends BaseController
 	{
 		$data = [];
 		helper(['form']);
-
 
 		if ($this->request->getMethod() == 'post') {
 			//let's do the validation here
@@ -35,8 +36,16 @@ class Users extends BaseController
 											->first();
 
 				$this->setUserSession($user);
-				//$session->setFlashdata('success', 'Successful Registration');
-				return redirect()->to('users/profil');
+				if ($user['jenis_user']==1)
+				{
+					return redirect()->to('admin');
+				}
+				elseif ($user['jenis_user']==2) {
+					return redirect()->to('verifikasi');
+				}
+				else {
+					return redirect()->to('users/profil');
+				}
 
 			}
 		}
@@ -57,6 +66,7 @@ class Users extends BaseController
 			'firstname' => $user['firstname'],
 			'lastname' => $user['lastname'],
 			'email' => $user['email'],
+			'jenis_user' => $user['jenis_user'],
 			'isLoggedIn' => true,
 		];
 
@@ -80,8 +90,11 @@ class Users extends BaseController
 
 			if (! $this->validate($rules)) {
 				$data['validation'] = $this->validator;
+
 			}else{
 				$model = new UserModel();
+
+
 
 				$newData = [
 					'firstname' => $this->request->getVar('firstname'),
@@ -89,6 +102,8 @@ class Users extends BaseController
 					'email' => $this->request->getVar('email'),
 					'password' => $this->request->getVar('password'),
 				];
+
+
 				$model->save($newData);
 				$session = session();
 				$session->setFlashdata('success', 'Pendaftaran akun berhasil');
@@ -102,6 +117,7 @@ class Users extends BaseController
 		echo view('register');
 		//echo view('templates/footer');
 	}
+
 
 	public function profile(){
 
@@ -161,37 +177,146 @@ class Users extends BaseController
 
 	public function profil()
 	{
+
+		helper(['form']);
 		$data=$this->session->get();
 
-		if ($this->cekPendaftaran($data['id_users']))
+		 // echo "<pre>";
+		 // print_r($data);
+		$id=$data['id_users'];
+
+		$db=new PersonalModel;
+		if (!$this->cekPersonal($data['id_users']))
 		{
-			$data['status']=1;
+			$data['personal']=FALSE;
 		}
-		else {
-				$data['status']=0;
+		else
+		{
+			$data['personal']=TRUE;
+			//$data['status_pendaftaran']=1;
+			$query_personal = $db->query('SELECT * FROM pendaftar WHERE pendaftar.id_users='.$id);
+			foreach ($query_personal->getRow() as $keyp => $valuep) {
+			 		$data[$keyp]=$valuep;
 		}
+
+		if ($this->cekNilai($data['id_users']))
+			{
+				//$db=new PersonalModel;
+				//$data['status_pendaftaran']=2;
+				$query_nilai = $db->query('SELECT * FROM pendaftar JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+		 											WHERE pendaftar.id_users='.$id);
+				foreach ($query_nilai->getRow() as $keyn => $valuen) {
+				 		$data[$keyn]=$valuen;
+					}
+				$data['nilai']=TRUE;
+			}
+			else
+			{
+				$data['nilai']=FALSE;
+			}
+
+			if ($this->cekPendaftaran($data['id_users']))
+				{
+					//$db=new PersonalModel;
+					//$data['status_pendaftaran']=3;
+					$query_pendaftaran = $db->query('SELECT * FROM pendaftar
+														JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+														JOIN pendaftaran ON nilai.no_pendaftaran = pendaftaran.no_pendaftaran
+														WHERE pendaftar.id_users='.$id);
+					foreach ($query_pendaftaran->getRow() as $keypn => $valuepn) {
+					 		$data[$keypn]=$valuepn;
+						}
+					$data['pendaftaran']=TRUE;
+				}
+				else
+				{
+					$data['pendaftaran']=FALSE;
+				}
+
+				$x=$data['status_pendaftaran'];
+				switch ($x) {
+					case $x <3:
+						$data['status']='Pengisian Form';
+						break;
+					case $x =3:
+						$data['status']='Menunggu Ujian Seleksi & Verifikasi berkas';
+						break;
+					case $x =4:
+						$data['status']='Menunggu Hasil Tes';
+						break;
+					case $x =5:
+						$data['status']='Sudah Ditetapkan';
+						break;
+				}
+		}
+
+		//OK
+		// if ($this->cekPersonal($data['id_users'])==1)
+		// {
+		// 	$db = new PersonalModel();
+		// 	$query = $db->query('SELECT * FROM pendaftar WHERE pendaftar.id_users='.$id);
+		// 	foreach ($query->getRow() as $key => $value) {
+		// 		$data[$key]=$value;
+		// 	}
+		// 	$data['status_pendaftaran']=1;
+		//  }
+		//  if ($this->cekNilai($data['id_users'])==2)
+		//  {
+		// 	 $db = new PersonalModel();
+ 		// 	 $query = $db->query('SELECT * FROM pendaftar JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+ 		// 				WHERE pendaftar.id_users='.$id);
+ 		// 	 foreach ($query->getRow() as $key => $value) {
+ 		// 	 $data[$key]=$value;
+		// 	 $data['status_pendaftaran']=2;
+		//  	 }
+		//  }
+		//  if ($this->cekPendaftaran($data['id_users'])==3)
+		//  {
+		// 	 $db = new PersonalModel();
+ 		// 	 $query = $db->query('SELECT * FROM pendaftar
+		// 		 										JOIN nilai ON pendaftar.no_pendaftaran = nilai.no_pendaftaran
+		// 												JOIN pendaftaran ON nilai.no_pendaftaran =
+ 		// 												WHERE pendaftar.id_users='.$id);
+ 		// 	 foreach ($query->getRow() as $key => $value) {
+ 		// 	 $data[$key]=$value;
+		// 	 $data['status_pendaftaran']=3;
+		//  	 }
+		//  }
+
+
 		echo view('header_l', $data);
-
 		echo view('profil',$data);
-	}
+		echo view('footer');
+	 }
 
-	public function cekPendaftaran($id)
+	public function cekPersonal($id)
 	{
-		$model = new PendaftarModel();
-		$builder = $model->table('pendaftar');
-
-		$query = $builder->where('id_users',$id);
-
+		$model = new PersonalModel();
+		$query = $model->where('id_users',$id);
 		if ($query->countAllResults() > 0)
 		{
 			return TRUE;
 		}
-		else {
-			return FALSE;
+	}
+
+	public function cekNilai($id)
+	{
+		$model = new NilaiModel();
+		$query = $model->where('id_users',$id);
+		if ($query->countAllResults() > 0)
+		{
+			return TRUE;
 		}
+	}
 
-
-
+	public function cekPendaftaran($id)
+	{
+		$model = new PendaftaranModel();
+		$query = $model->where('id_users',$id);
+		if ($query->countAllResults() > 0)
+		{
+			return TRUE;
+		}
 	}
 
 	//--------------------------------------------------------------------
